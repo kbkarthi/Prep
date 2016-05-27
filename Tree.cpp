@@ -8,7 +8,6 @@ typedef struct Btree
     int i;
 }BTree;
 
-
 class BT 
 {
     public:
