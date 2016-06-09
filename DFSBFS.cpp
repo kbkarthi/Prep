@@ -1,5 +1,7 @@
 #include <iostream>
 #include <list>
+#include <queue>
+#include <thread>
 
 using namespace std;
 
@@ -22,11 +24,36 @@ class Graph
         }
         void AddEdge(int, int);
         void DFS();
+        void BFS();
 };
 
 void Graph::AddEdge(int V1, int V2)
 {
     this->adj[V1].push_back(V2);
+}
+
+void Graph::BFS()
+{
+    queue<int> myqueue;
+    myqueue.push(0);
+    this->Visited[0] = true;
+    
+    list<int>::iterator i;  
+    while(!myqueue.empty())
+    {
+        int front = myqueue.front();
+        myqueue.pop();
+        cout << front << endl;
+
+        for (i = this->adj[front].begin(); i != this->adj[front].end(); i++)
+        {
+            if (!Visited[*i])
+            {
+                this->Visited[*i] = true;
+                myqueue.push(*i);
+            }
+        }
+    }
 }
 
 void Graph::DFS()
@@ -61,8 +88,7 @@ int main()
     g.AddEdge(2, 0);
     g.AddEdge(2, 3);
     g.AddEdge(3, 3);
-   g.DFS();
+   g.BFS();
    
    return 0;
 }
-
